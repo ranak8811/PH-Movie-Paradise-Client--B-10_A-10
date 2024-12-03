@@ -12,13 +12,13 @@ const Navbar = () => {
         <NavLink to={"/"}>Home</NavLink>
       </li>
       <li>
-        <NavLink to={"/"}>All Movies</NavLink>
+        <NavLink to={"/allMovies"}>All Movies</NavLink>
       </li>
       <li>
-        <NavLink to={"/"}>Add Movie</NavLink>
+        <NavLink to={"/addMovie"}>Add Movie</NavLink>
       </li>
       <li>
-        <NavLink to={"/"}>My Favorites</NavLink>
+        <NavLink to={"/favouriteMovies"}>My Favorites</NavLink>
       </li>
     </div>
   );

@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useContext } from "react";
 import { AuthContext } from "../providers/AuthProvider";
@@ -7,6 +7,7 @@ import { AuthContext } from "../providers/AuthProvider";
 const Login = () => {
   const { loginUsingGoogle, setUser, loginRegisteredUser } =
     useContext(AuthContext);
+  const location = useLocation();
   const {
     register,
     handleSubmit,
@@ -25,6 +26,7 @@ const Login = () => {
         toast.success(
           `${result.user.displayName} is logged in with email and password`
         );
+
         navigate(location?.state ? location.state : "/");
       })
       .catch((err) => {
@@ -109,7 +111,7 @@ const Login = () => {
         <div className="mt-4 text-center">
           <p>
             Don&apos;t have an account?{" "}
-            <Link to="/register" className="text-red-400 hover:underline">
+            <Link to="/auth/register" className="text-red-400 hover:underline">
               Register here
             </Link>
           </p>

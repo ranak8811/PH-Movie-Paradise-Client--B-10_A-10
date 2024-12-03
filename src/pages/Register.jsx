@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { AuthContext } from "../providers/AuthProvider";
+import Swal from "sweetalert2";
 
 const Register = () => {
   const { registerNewUser, setUser, updateUserProfile, loginUsingGoogle } =
@@ -67,7 +68,7 @@ const Register = () => {
             // console.log("User created to db: ", data);
 
             if (data.insertedId) {
-              toast.success("User created to db");
+              Swal.fire("User created to database successfully");
             }
           });
         //--------------------------------databse part ends
@@ -203,7 +204,7 @@ const Register = () => {
         <div className="mt-4 text-center">
           <p>
             Already have an account?{" "}
-            <Link to="/login" className="text-red-400 hover:underline">
+            <Link to="/auth/login" className="text-red-400 hover:underline">
               Login here
             </Link>
           </p>

@@ -5,7 +5,6 @@ import MovieCard from "../components/movieCard";
 const AllMovies = () => {
   const [allMovies, setAllMovies] = useState([]);
 
-  // Fetch the high-rated movies
   useEffect(() => {
     fetch("http://localhost:4000/allMovies")
       .then((res) => res.json())

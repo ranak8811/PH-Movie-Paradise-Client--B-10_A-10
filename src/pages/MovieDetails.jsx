@@ -1,4 +1,4 @@
-import { useLoaderData, useNavigate } from "react-router-dom";
+import { Link, useLoaderData, useNavigate } from "react-router-dom";
 import Heading from "../components/Heading";
 import Swal from "sweetalert2";
 const MovieDetails = () => {
@@ -81,9 +81,13 @@ const MovieDetails = () => {
         <button className="bg-green-600 hover:bg-green-800 text-white font-semibold py-2 px-6 rounded-lg transition">
           Add to Favorite
         </button>
-        <button className="bg-gray-700 hover:bg-gray-900 text-white font-semibold py-2 px-6 rounded-lg transition">
+
+        <Link
+          to={`/updateMovie/${_id}`}
+          className="bg-gray-700 hover:bg-gray-900 text-white font-semibold py-2 px-6 rounded-lg transition"
+        >
           Update Movie
-        </button>
+        </Link>
       </div>
     </div>
   );

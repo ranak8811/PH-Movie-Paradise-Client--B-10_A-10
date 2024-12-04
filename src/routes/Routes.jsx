@@ -10,6 +10,7 @@ import PrivateRouter from "./PrivateRouter";
 import AddMovie from "../pages/AddMovie";
 import FavouriteMovies from "../pages/FavouriteMovies";
 import MovieDetails from "../pages/MovieDetails";
+import UpdateMovie from "../pages/UpdateMovie";
 
 const router = createBrowserRouter([
   {
@@ -46,6 +47,16 @@ const router = createBrowserRouter([
         element: (
           <PrivateRouter>
             <MovieDetails></MovieDetails>
+          </PrivateRouter>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:4000/allMovies/${params.id}`),
+      },
+      {
+        path: "/updateMovie/:id",
+        element: (
+          <PrivateRouter>
+            <UpdateMovie></UpdateMovie>
           </PrivateRouter>
         ),
         loader: ({ params }) =>

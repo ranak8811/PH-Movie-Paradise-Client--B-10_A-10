@@ -1,22 +1,23 @@
 /* eslint-disable no-unused-vars */
-import { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useLoaderData, useParams, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { Rating } from "react-simple-star-rating";
-import { AuthContext } from "../providers/AuthProvider";
 import Swal from "sweetalert2";
 
-const AddMovie = () => {
-  const { user } = useContext(AuthContext);
+const UpdateMovie = () => {
+  const { id } = useParams();
+  const movie = useLoaderData();
   const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
-    posterURL: "",
-    title: "",
-    genre: "",
-    duration: "",
-    releaseYear: "",
-    rating: 0,
-    summary: "",
+    posterURL: movie.posterURL || "",
+    title: movie.title || "",
+    genre: movie.genre || "",
+    duration: movie.duration || "",
+    releaseYear: movie.releaseYear || "",
+    rating: movie.rating || 0,
+    summary: movie.summary || "",
   });
 
   const [errors, setErrors] = useState({});
@@ -92,24 +93,18 @@ const AddMovie = () => {
       return;
     }
 
-    const movieData = {
-      ...formData,
-      userEmail: user.email,
-    };
+    // console.log(formData);
 
     //----------------------------------------------------------------
-    fetch("http://localhost:4000/movies", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(movieData),
+    fetch(`http://localhost:4000/updateMovie/${id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData),
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data.insertedId) {
-          Swal.fire("Movie added to database successfully");
-        }
+        console.log(data);
+        Swal.fire("Movie updated successfully");
       });
     //----------------------------------------------------------------
 
@@ -122,7 +117,7 @@ const AddMovie = () => {
     <div className="flex items-center justify-center bg-gradient-to-r from-black via-red-900 to-black text-white p-4">
       <div className="w-full max-w-lg p-8 bg-gray-900 bg-opacity-80 rounded-lg shadow-lg">
         <h2 className="text-3xl font-bold text-center mb-6 border-b-2 border-red-500 pb-2">
-          Add a New Movie
+          Update Movie
         </h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
@@ -285,7 +280,7 @@ const AddMovie = () => {
             type="submit"
             className="btn bg-gradient-to-r from-red-600 to-red-800 w-full mt-4 text-white font-bold"
           >
-            Add Movie
+            Update Movie
           </button>
         </form>
       </div>
@@ -293,4 +288,4 @@ const AddMovie = () => {
   );
 };
 
-export default AddMovie;
+export default UpdateMovie;

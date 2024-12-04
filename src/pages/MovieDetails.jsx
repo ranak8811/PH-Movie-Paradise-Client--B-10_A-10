@@ -1,6 +1,8 @@
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import Heading from "../components/Heading";
+import Swal from "sweetalert2";
 const MovieDetails = () => {
+  const navigate = useNavigate();
   const {
     _id,
     posterURL,
@@ -11,6 +13,35 @@ const MovieDetails = () => {
     rating,
     summary,
   } = useLoaderData();
+
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`http://localhost:4000/allMovies/${id}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.deletedCount) {
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your movie has been deleted.",
+                icon: "success",
+              });
+            }
+            navigate("/allMovies");
+          });
+      }
+    });
+  };
 
   return (
     <div className="bg-gradient-to-r from-black via-gray-900 to-black p-4">
@@ -42,7 +73,7 @@ const MovieDetails = () => {
 
       <div className="mt-6 flex justify-center gap-4">
         <button
-          onClick={_id}
+          onClick={() => handleDelete(_id)}
           className="bg-red-600 hover:bg-red-800 text-white font-semibold py-2 px-6 rounded-lg transition"
         >
           Delete Movie

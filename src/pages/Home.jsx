@@ -96,7 +96,7 @@ const Home = () => {
             <button
               key={genre}
               onClick={() => setSelectedGenre(genre.toLowerCase())}
-              className="btn bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800 dark:from-purple-500 dark:to-purple-700 dark:hover:from-purple-600 dark:hover:to-purple-800 text-white font-bold px-4 py-2 rounded-lg transition-transform transform hover:scale-105"
+              className="btn bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800 dark:from-purple-500 dark:to-purple-700 dark:hover:from-purple-600 dark:hover:to-purple-800 text-white font-bold px-4 py-2 rounded-lg transition-transform transform hover:scale-105 mb-8"
             >
               {genre}
             </button>
@@ -105,7 +105,7 @@ const Home = () => {
       </section>
 
       {selectedGenre && (
-        <section className="p-8 bg-gradient-to-r from-white via-gray-200 to-white dark:from-black dark:via-gray-900 dark:to-black text-black dark:text-white">
+        <section className="px-8 pb-8 bg-gradient-to-r from-white via-gray-200 to-white dark:from-black dark:via-gray-900 dark:to-black text-black dark:text-white">
           <div className="text-center text-4xl font-bold text-red-500 dark:text-green-400 mb-4">
             {`Movies in ${
               selectedGenre.charAt(0).toUpperCase() + selectedGenre.slice(1)

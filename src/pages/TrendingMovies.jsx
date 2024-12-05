@@ -61,6 +61,7 @@ const TrendingMovies = () => {
           fill="#333"
           fontSize="14"
           fontWeight="bold"
+          color="red"
         >
           ⭐ {payload.rating}/5
         </text>
@@ -70,7 +71,7 @@ const TrendingMovies = () => {
   };
 
   return (
-    <div className="p-8">
+    <div className="bg-gradient-to-r from-black via-gray-900 to-black p-8">
       <Heading title={"Trending Movies"}></Heading>
       <ResponsiveContainer width="100%" height={400}>
         <BarChart

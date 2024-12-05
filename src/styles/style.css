@@ -1,7 +1,23 @@
+.custom-link {
+  color: white;
+  font-weight: 500;
+  transition: color 0.3s, background-color 0.3s;
+}
+
+.custom-link:hover {
+  background-color: red;
+  text-decoration: none;
+}
+
 .active {
-  font-weight: bolder;
+  font-weight: bold;
   font-size: 18px;
-  color: red !important;
-  background-color: white !important;
+  background-color: red !important;
   text-decoration: underline;
+}
+
+.dropdown .menu-sm {
+  background-color: black;
+  color: white;
+  border: 1px solid green;
 }

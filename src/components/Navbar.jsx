@@ -9,30 +9,41 @@ const Navbar = () => {
   const links = (
     <div className="lg:flex gap-2 space-y-1 lg:space-y-0">
       <li>
-        <NavLink to={"/"}>Home</NavLink>
+        <NavLink to={"/"} className="custom-link">
+          Home
+        </NavLink>
       </li>
       <li>
-        <NavLink to={"/allMovies"}>All Movies</NavLink>
+        <NavLink to={"/allMovies"} className="custom-link">
+          All Movies
+        </NavLink>
       </li>
       <li>
-        <NavLink to={"/addMovie"}>Add Movie</NavLink>
+        <NavLink to={"/addMovie"} className="custom-link">
+          Add Movie
+        </NavLink>
       </li>
       <li>
-        <NavLink to={"/favouriteMovies"}>My Favorites</NavLink>
+        <NavLink to={"/favouriteMovies"} className="custom-link">
+          My Favorites
+        </NavLink>
       </li>
       <li>
-        <NavLink to={"/trendingMovies"}>Trending Movies</NavLink>
+        <NavLink to={"/trendingMovies"} className="custom-link">
+          Trending Movies
+        </NavLink>
       </li>
     </div>
   );
+
   return (
-    <div className="navbar bg-base-100">
+    <div className="navbar bg-black text-white">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
+              className="h-5 w-5 text-green-500"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -47,12 +58,12 @@ const Navbar = () => {
           </div>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+            className="menu menu-sm dropdown-content bg-black text-white rounded-box z-[1] mt-3 w-52 p-2 shadow"
           >
             {links}
           </ul>
         </div>
-        <Link to={"/"} className="btn btn-ghost text-xl">
+        <Link to={"/"} className="btn btn-ghost text-red-500 text-xl font-bold">
           Movie-Paradise
         </Link>
       </div>
@@ -68,29 +79,35 @@ const Navbar = () => {
                 title={user.displayName}
                 src={user.photoURL}
                 alt={user.displayName}
-                className="w-10 border-2 cursor-pointer border-gray-400 rounded-full object-cover"
+                className="w-10 border-2 cursor-pointer border-red-500 rounded-full object-cover"
               />
             )}
           </div>
           <div>
             {user && user.displayName ? (
               <div className="flex items-center gap-3">
-                <h6 className="font-semibold hidden md:block">
+                <h6 className="font-semibold hidden md:block text-green-400">
                   {user.displayName}
                 </h6>
                 <button
                   onClick={logOutUser}
-                  className="btn bg-red-500 text-white"
+                  className="btn bg-red-500 hover:bg-orange-500 text-white"
                 >
                   Logout
                 </button>
               </div>
             ) : (
               <div className="space-x-2">
-                <Link to={"/auth/login"} className="btn">
+                <Link
+                  to={"/auth/login"}
+                  className="btn bg-green-500 text-black"
+                >
                   Login
                 </Link>
-                <Link to={"/auth/register"} className="btn">
+                <Link
+                  to={"/auth/register"}
+                  className="btn bg-red-500 text-white hover:bg-green-500"
+                >
                   Register
                 </Link>
               </div>

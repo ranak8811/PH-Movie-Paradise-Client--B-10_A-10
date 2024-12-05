@@ -54,7 +54,7 @@ const MovieDetails = () => {
     const { _id, ...movieWithOutId } = movie;
     const favoriteMovieData = {
       ...movieWithOutId,
-      userEmail: user.email, // Add the current user's email
+      userEmail: user.email,
     };
 
     fetch("http://localhost:4000/favoriteMovies", {

@@ -75,49 +75,61 @@ const Footer = () => {
             </ul>
           </div>
 
-          <div>
-            <h3 className="text-lg font-semibold text-white mb-4">Follow Us</h3>
-            <div className="flex space-x-4">
-              <a
-                href="https://www.facebook.com/ranaf8811"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-400 hover:text-blue-400"
-              >
-                <FaFacebook size={24} />
-              </a>
-              <a
-                href="https://twitter.com/ranak8811"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-400 hover:text-green-400"
-              >
-                <FaTwitter size={24} />
-              </a>
-              <a
-                href="https://www.linkedin.com/in/ranak8811/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-400 hover:text-blue-400"
-              >
-                <FaLinkedin size={24} />
-              </a>
-              <a
-                href="https://www.instagram.com/ranaf8811/?theme=dark"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-400 hover:text-red-400"
-              >
-                <FaInstagram size={24} />
-              </a>
-              <a
-                href="https://github.com/ranak8811"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-400 hover:text-green-400"
-              >
-                <FaGithub size={24} />
-              </a>
+          <div className="space-y-6">
+            <div>
+              <h3 className="text-lg font-semibold text-white mb-4">
+                Follow Us
+              </h3>
+              <div className="flex space-x-4">
+                <a
+                  href="https://www.facebook.com/ranaf8811"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-blue-400"
+                >
+                  <FaFacebook size={24} />
+                </a>
+                <a
+                  href="https://twitter.com/ranak8811"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-green-400"
+                >
+                  <FaTwitter size={24} />
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/ranak8811/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-blue-400"
+                >
+                  <FaLinkedin size={24} />
+                </a>
+                <a
+                  href="https://www.instagram.com/ranaf8811/?theme=dark"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-red-400"
+                >
+                  <FaInstagram size={24} />
+                </a>
+                <a
+                  href="https://github.com/ranak8811"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-green-400"
+                >
+                  <FaGithub size={24} />
+                </a>
+              </div>
+            </div>
+
+            <div className="text-center md:text-left mb-4 md:mb-0">
+              <h2 className="text-lg font-semibold text-green-400">
+                Contact Us
+              </h2>
+              <p>Email: contact@movie-paradise.com</p>
+              <p>Phone: +1 234 567 890</p>
             </div>
           </div>
         </div>

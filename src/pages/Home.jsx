@@ -7,7 +7,9 @@ import PopularMovieCard from "../components/PopularMovieCard";
 
 const Home = () => {
   const [featuredMovies, setFeaturedMovies] = useState([]);
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(true);
+  const [genreMovies, setGenreMovies] = useState([]);
+  const [selectedGenre, setSelectedGenre] = useState(null);
 
   useEffect(() => {
     fetch("http://localhost:4000/highRatedMovies")
@@ -17,6 +19,25 @@ const Home = () => {
       })
       .catch((error) => console.error("Error fetching movies:", error));
   }, []);
+
+  useEffect(() => {
+    if (selectedGenre) {
+      fetch(`http://localhost:4000/genre/${selectedGenre}`)
+        .then((res) => res.json())
+        .then((data) => setGenreMovies(data))
+        .catch((error) => console.error("Error fetching genre movies:", error));
+    }
+  }, [selectedGenre]);
+
+  const genres = [
+    "Action",
+    "Comedy",
+    "Thriller",
+    "Sci-Fi",
+    "Drama",
+    "Documentary",
+    "Horror",
+  ];
 
   const handleThemeToggle = () => {
     setDarkMode(!darkMode);
@@ -67,6 +88,63 @@ const Home = () => {
           ))}
         </div>
       </section>
+
+      <section className="p-8 bg-gradient-to-r from-white via-gray-200 to-white dark:from-black dark:via-gray-900 dark:to-black text-black dark:text-white">
+        <Heading title={"Browse by Genres"}></Heading>
+        <div className="flex flex-wrap gap-4 justify-center">
+          {genres.map((genre) => (
+            <button
+              key={genre}
+              onClick={() => setSelectedGenre(genre.toLowerCase())}
+              className="btn bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800 dark:from-purple-500 dark:to-purple-700 dark:hover:from-purple-600 dark:hover:to-purple-800 text-white font-bold px-4 py-2 rounded-lg transition-transform transform hover:scale-105"
+            >
+              {genre}
+            </button>
+          ))}
+        </div>
+      </section>
+
+      {selectedGenre && (
+        <section className="p-8 bg-gradient-to-r from-white via-gray-200 to-white dark:from-black dark:via-gray-900 dark:to-black text-black dark:text-white">
+          <div className="text-center text-4xl font-bold text-red-500 dark:text-green-400 mb-4">
+            {`Movies in ${
+              selectedGenre.charAt(0).toUpperCase() + selectedGenre.slice(1)
+            } Genre`}
+          </div>
+
+          {genreMovies.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {genreMovies.map((movie) => (
+                <div
+                  key={movie._id}
+                  className="bg-white dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300"
+                >
+                  <img
+                    src={movie.posterURL}
+                    alt={movie.title}
+                    className="w-full h-48 object-cover hover:scale-105 transition-transform duration-300"
+                  />
+                  <div className="p-4">
+                    <h3 className="text-lg font-bold text-red-500 dark:text-green-400">
+                      {movie.title}
+                    </h3>
+                    <p className="text-sm text-gray-700 dark:text-gray-300">
+                      {movie.description}
+                    </p>
+                    <p className="text-sm font-semibold mt-2 text-gray-900 dark:text-gray-100">
+                      ⭐ {movie.rating}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center text-xl font-semibold text-gray-700 dark:text-gray-300 mt-8">
+              {`Sorry, no movies found in the ${selectedGenre} genre.`}
+            </div>
+          )}
+        </section>
+      )}
     </div>
   );
 };

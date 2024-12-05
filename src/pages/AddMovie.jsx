@@ -182,12 +182,13 @@ const AddMovie = () => {
               }`}
             >
               <option value="">Select Genre</option>
-              <option value="comedy">Comedy</option>
-              <option value="drama">Drama</option>
-              <option value="horror">Horror</option>
               <option value="action">Action</option>
+              <option value="comedy">Comedy</option>
               <option value="thriller">Thriller</option>
+              <option value="sci-fi">Sci-Fi</option>
+              <option value="drama">Drama</option>
               <option value="documentary">Documentary</option>
+              <option value="horror">Horror</option>
             </select>
             {errors.genre && (
               <p className="text-red-500 text-sm mt-1">{errors.genre}</p>

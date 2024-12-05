@@ -1,8 +1,14 @@
+/* eslint-disable no-unused-vars */
 import { Link, useLoaderData, useNavigate } from "react-router-dom";
 import Heading from "../components/Heading";
 import Swal from "sweetalert2";
+import { useContext } from "react";
+import { AuthContext } from "../providers/AuthProvider";
+
 const MovieDetails = () => {
+  const { user } = useContext(AuthContext);
   const navigate = useNavigate();
+  const movie = useLoaderData();
   const {
     _id,
     posterURL,
@@ -12,7 +18,8 @@ const MovieDetails = () => {
     releaseYear,
     rating,
     summary,
-  } = useLoaderData();
+    email,
+  } = movie;
 
   const handleDelete = (id) => {
     Swal.fire({
@@ -41,6 +48,28 @@ const MovieDetails = () => {
           });
       }
     });
+  };
+
+  const handleAddToFavorite = () => {
+    const { _id, ...movieWithOutId } = movie;
+    const favoriteMovieData = {
+      ...movieWithOutId,
+      userEmail: user.email, // Add the current user's email
+    };
+
+    fetch("http://localhost:4000/favoriteMovies", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(favoriteMovieData),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.insertedId) {
+          Swal.fire("Your favorite movie added to database successfully");
+        }
+      });
   };
 
   return (
@@ -78,7 +107,10 @@ const MovieDetails = () => {
         >
           Delete Movie
         </button>
-        <button className="bg-green-600 hover:bg-green-800 text-white font-semibold py-2 px-6 rounded-lg transition">
+        <button
+          onClick={handleAddToFavorite}
+          className="bg-green-600 hover:bg-green-800 text-white font-semibold py-2 px-6 rounded-lg transition"
+        >
           Add to Favorite
         </button>
 

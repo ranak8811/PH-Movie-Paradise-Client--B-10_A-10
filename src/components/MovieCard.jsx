@@ -25,7 +25,7 @@ const MovieCard = ({ movie }) => {
         </p>
 
         <p className="text-sm text-gray-300 mt-1">
-          <span className="font-bold text-green-400">Rating:</span> {rating}/10
+          <span className="font-bold text-green-400">Rating:</span> {rating}/5
         </p>
 
         <Link

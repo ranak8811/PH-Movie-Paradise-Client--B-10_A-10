@@ -89,7 +89,7 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="p-8 bg-gradient-to-r from-white via-gray-200 to-white dark:from-black dark:via-gray-900 dark:to-black text-black dark:text-white">
+      <section className="px-8 pt-8 bg-gradient-to-r from-white via-gray-200 to-white dark:from-black dark:via-gray-900 dark:to-black text-black dark:text-white">
         <Heading title={"Browse by Genres"}></Heading>
         <div className="flex flex-wrap gap-4 justify-center">
           {genres.map((genre) => (

@@ -20,6 +20,9 @@ const Navbar = () => {
       <li>
         <NavLink to={"/favouriteMovies"}>My Favorites</NavLink>
       </li>
+      <li>
+        <NavLink to={"/trendingMovies"}>Trending Movies</NavLink>
+      </li>
     </div>
   );
   return (

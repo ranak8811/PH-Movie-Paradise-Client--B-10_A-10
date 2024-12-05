@@ -11,6 +11,7 @@ import AddMovie from "../pages/AddMovie";
 import FavouriteMovies from "../pages/FavouriteMovies";
 import MovieDetails from "../pages/MovieDetails";
 import UpdateMovie from "../pages/UpdateMovie";
+import TrendingMovies from "../pages/TrendingMovies";
 
 const router = createBrowserRouter([
   {
@@ -61,6 +62,10 @@ const router = createBrowserRouter([
         ),
         loader: ({ params }) =>
           fetch(`http://localhost:4000/allMovies/${params.id}`),
+      },
+      {
+        path: "/trendingMovies",
+        element: <TrendingMovies></TrendingMovies>,
       },
     ],
   },

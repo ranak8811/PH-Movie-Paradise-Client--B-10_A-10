@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import Banner from "../components/Banner";
 import { Link } from "react-router-dom";
 import MovieCard from "../components/movieCard";
+import Heading from "../components/Heading";
+import PopularMovieCard from "../components/PopularMovieCard";
 
 const Home = () => {
   const [featuredMovies, setFeaturedMovies] = useState([]);
@@ -53,6 +55,16 @@ const Home = () => {
           >
             See All Movies
           </Link>
+        </div>
+      </section>
+
+      <section className="p-8 bg-gradient-to-r from-white via-gray-200 to-white dark:from-black dark:via-gray-900 dark:to-black text-black dark:text-white">
+        <Heading title={"Popular Movies"}></Heading>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {featuredMovies.map((movie) => (
+            <PopularMovieCard key={movie._id} movie={movie}></PopularMovieCard>
+          ))}
         </div>
       </section>
     </div>

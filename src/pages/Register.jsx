@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
@@ -29,6 +30,15 @@ const Register = () => {
     return errors;
   };
 
+  const isValidURL = (string) => {
+    try {
+      new URL(string);
+      return true;
+    } catch (_) {
+      return false;
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -37,7 +47,13 @@ const Register = () => {
 
     if (!name) newErrors.name = "Name is required.";
     if (!email) newErrors.email = "Email is required.";
-    if (!photoURL) newErrors.photoURL = "Photo URL is required.";
+
+    if (!photoURL) {
+      newErrors.photoURL = "Photo URL is required.";
+    } else if (!isValidURL(formData.photoURL)) {
+      newErrors.photoURL = "Please enter a valid URL.";
+    }
+
     const passwordErrors = validatePassword(password);
     if (passwordErrors.length) newErrors.password = passwordErrors.join(" ");
 
@@ -73,7 +89,6 @@ const Register = () => {
           });
         //--------------------------------databse part ends
 
-        localStorage.setItem("resetEmail", result.user.email);
         updateUserProfile({ displayName: name, photoURL: photoURL })
           .then(() => {
             toast.success(
@@ -98,6 +113,36 @@ const Register = () => {
     loginUsingGoogle()
       .then((result) => {
         setUser(result.user);
+
+        //--------------------------------database part starts
+        console.log("User created at Firebase: ", result.user);
+
+        const createdAt = result?.user?.metadata?.creationTime;
+
+        const newUser = {
+          name: result.user.displayName,
+          email: result.user.email,
+          createdAt: createdAt,
+        };
+
+        fetch("http://localhost:4000/users", {
+          method: "PUT",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(newUser),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.insertedId) {
+              Swal.fire("User created in the database successfully");
+            }
+          })
+          .catch((error) => {
+            console.error("Error creating user in the database:", error);
+          });
+        //--------------------------------database part ends
+
         toast.success(`${result.user.displayName} is logged in with Google`);
         navigate(location?.state ? location.state : "/");
       })

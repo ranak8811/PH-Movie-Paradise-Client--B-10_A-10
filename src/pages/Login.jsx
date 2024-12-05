@@ -15,35 +15,56 @@ const Login = () => {
   } = useForm();
   const navigate = useNavigate();
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     const { email, password } = data;
     console.log(email, password);
-    localStorage.setItem("resetEmail", email);
 
-    loginRegisteredUser(email, password)
-      .then((result) => {
-        setUser(result.user);
-        toast.success(
-          `${result.user.displayName} is logged in with email and password`
-        );
+    try {
+      const result = await loginRegisteredUser(email, password);
+      setUser(result.user);
 
-        navigate(location?.state ? location.state : "/");
-      })
-      .catch((err) => {
-        toast.error(err);
-      });
+      toast.success(
+        `${result.user.displayName} is logged in with email and password`
+      );
+
+      navigate(location?.state ? location.state : "/");
+    } catch (err) {
+      const errorMessage = err.message || "An unexpected error occurred!";
+      toast.error(errorMessage);
+    }
   };
 
-  const handleGoogleLogin = () => {
-    loginUsingGoogle()
-      .then((result) => {
-        setUser(result.user);
-        toast.success(`${result.user.displayName} logged in with Google`);
-        navigate(location?.state ? location.state : "/");
-      })
-      .catch((err) => {
-        toast.error(err);
+  const handleGoogleLogin = async () => {
+    try {
+      const result = await loginUsingGoogle();
+      setUser(result.user);
+
+      //--------------------------------database part starts
+      console.log("User created at Firebase: ", result.user);
+
+      const createdAt = result?.user?.metadata?.creationTime;
+
+      const newUser = {
+        name: result.user.displayName,
+        email: result.user.email,
+        createdAt: createdAt,
+      };
+
+      await fetch("http://localhost:4000/users", {
+        method: "PUT",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(newUser),
       });
+      //--------------------------------database part ends
+
+      toast.success(`${result.user.displayName} logged in with Google`);
+      navigate(location?.state ? location.state : "/");
+    } catch (err) {
+      const errorMessage = err.message || "An unexpected error occurred!";
+      toast.error(errorMessage);
+    }
   };
 
   return (

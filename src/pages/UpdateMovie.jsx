@@ -96,14 +96,14 @@ const UpdateMovie = () => {
     // console.log(formData);
 
     //----------------------------------------------------------------
-    fetch(`http://localhost:4000/updateMovie/${id}`, {
+    fetch(`https://movie-server-ruby.vercel.app/updateMovie/${id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formData),
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         Swal.fire("Movie updated successfully");
       });
     //----------------------------------------------------------------

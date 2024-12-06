@@ -98,7 +98,7 @@ const AddMovie = () => {
     };
 
     //----------------------------------------------------------------
-    fetch("http://localhost:4000/movies", {
+    fetch("https://movie-server-ruby.vercel.app/movies", {
       method: "POST",
       headers: {
         "content-type": "application/json",

@@ -66,13 +66,13 @@ const Register = () => {
     registerNewUser(email, password)
       .then((result) => {
         //--------------------------------databse part starts
-        console.log("User created at fb: ", result.user);
+        // console.log("User created at fb: ", result.user);
 
         const createdAt = result?.user?.metadata?.creationTime;
 
         const newUser = { name, email, createdAt };
         // add new user to the database
-        fetch("http://localhost:4000/users", {
+        fetch("https://movie-server-ruby.vercel.app/users", {
           method: "POST",
           headers: {
             "content-type": "application/json",
@@ -115,7 +115,7 @@ const Register = () => {
         setUser(result.user);
 
         //--------------------------------database part starts
-        console.log("User created at Firebase: ", result.user);
+        // console.log("User created at Firebase: ", result.user);
 
         const createdAt = result?.user?.metadata?.creationTime;
 
@@ -125,7 +125,7 @@ const Register = () => {
           createdAt: createdAt,
         };
 
-        fetch("http://localhost:4000/users", {
+        fetch("https://movie-server-ruby.vercel.app/users", {
           method: "PUT",
           headers: {
             "content-type": "application/json",

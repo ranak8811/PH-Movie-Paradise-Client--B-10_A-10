@@ -17,7 +17,7 @@ const Login = () => {
 
   const onSubmit = async (data) => {
     const { email, password } = data;
-    console.log(email, password);
+    // console.log(email, password);
 
     try {
       const result = await loginRegisteredUser(email, password);
@@ -40,7 +40,7 @@ const Login = () => {
       setUser(result.user);
 
       //--------------------------------database part starts
-      console.log("User created at Firebase: ", result.user);
+      // console.log("User created at Firebase: ", result.user);
 
       const createdAt = result?.user?.metadata?.creationTime;
 
@@ -50,7 +50,7 @@ const Login = () => {
         createdAt: createdAt,
       };
 
-      await fetch("http://localhost:4000/users", {
+      await fetch("https://movie-server-ruby.vercel.app/users", {
         method: "PUT",
         headers: {
           "content-type": "application/json",

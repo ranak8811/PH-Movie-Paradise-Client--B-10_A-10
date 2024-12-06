@@ -12,7 +12,7 @@ const Home = () => {
   const [selectedGenre, setSelectedGenre] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:4000/highRatedMovies")
+    fetch("https://movie-server-ruby.vercel.app/highRatedMovies")
       .then((res) => res.json())
       .then((data) => {
         setFeaturedMovies(data);
@@ -22,7 +22,7 @@ const Home = () => {
 
   useEffect(() => {
     if (selectedGenre) {
-      fetch(`http://localhost:4000/genre/${selectedGenre}`)
+      fetch(`https://movie-server-ruby.vercel.app/genre/${selectedGenre}`)
         .then((res) => res.json())
         .then((data) => setGenreMovies(data))
         .catch((error) => console.error("Error fetching genre movies:", error));

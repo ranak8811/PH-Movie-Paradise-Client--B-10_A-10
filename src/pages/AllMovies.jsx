@@ -7,14 +7,16 @@ const AllMovies = () => {
   const [search, setSearch] = useState("");
 
   useEffect(() => {
-    fetch(`http://localhost:4000/allMovies?searchParams=${search}`)
+    fetch(
+      `https://movie-server-ruby.vercel.app/allMovies?searchParams=${search}`
+    )
       .then((res) => res.json())
       .then((data) => {
         setAllMovies(data);
       })
       .catch((error) => console.error("Error fetching movies:", error));
   }, [search]);
-  console.log(allMovies);
+  // console.log(allMovies);
   return (
     <div className="bg-gradient-to-r from-black via-gray-900 to-black p-4">
       <header>

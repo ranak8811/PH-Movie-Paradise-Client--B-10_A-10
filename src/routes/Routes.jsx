@@ -51,7 +51,7 @@ const router = createBrowserRouter([
           </PrivateRouter>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:4000/allMovies/${params.id}`),
+          fetch(`https://movie-server-ruby.vercel.app/allMovies/${params.id}`),
       },
       {
         path: "/updateMovie/:id",
@@ -61,7 +61,7 @@ const router = createBrowserRouter([
           </PrivateRouter>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:4000/allMovies/${params.id}`),
+          fetch(`https://movie-server-ruby.vercel.app/allMovies/${params.id}`),
       },
       {
         path: "/trendingMovies",

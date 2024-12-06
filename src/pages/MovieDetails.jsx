@@ -32,7 +32,7 @@ const MovieDetails = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:4000/allMovies/${id}`, {
+        fetch(`https://movie-server-ruby.vercel.app/allMovies/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
@@ -57,7 +57,7 @@ const MovieDetails = () => {
       userEmail: user.email,
     };
 
-    fetch("http://localhost:4000/favoriteMovies", {
+    fetch("https://movie-server-ruby.vercel.app/favoriteMovies", {
       method: "POST",
       headers: {
         "content-type": "application/json",

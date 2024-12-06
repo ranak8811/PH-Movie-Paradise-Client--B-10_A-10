@@ -9,12 +9,15 @@ const FavouriteMovies = () => {
   useEffect(() => {
     if (!user || !user.email) return;
 
-    fetch(`http://localhost:4000/favoriteMovies?email=${user.email}`, {
-      method: "GET",
-      headers: {
-        "content-type": "application/json",
-      },
-    })
+    fetch(
+      `https://movie-server-ruby.vercel.app/favoriteMovies?email=${user.email}`,
+      {
+        method: "GET",
+        headers: {
+          "content-type": "application/json",
+        },
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         setFavoriteMovies(data);
@@ -33,7 +36,7 @@ const FavouriteMovies = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:4000/favoriteMovies/${id}`, {
+        fetch(`https://movie-server-ruby.vercel.app/favoriteMovies/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())

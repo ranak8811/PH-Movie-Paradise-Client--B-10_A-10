@@ -14,7 +14,7 @@ const TrendingMovies = () => {
   const [featuredMovies, setFeaturedMovies] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:4000/highRatedMovies")
+    fetch("https://movie-server-ruby.vercel.app/highRatedMovies")
       .then((res) => res.json())
       .then((data) => {
         setFeaturedMovies(data);

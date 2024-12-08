@@ -1,11 +1,12 @@
 import { Link, NavLink } from "react-router-dom";
 import "../styles/style.css";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../providers/AuthProvider";
 import { MdDarkMode, MdLightMode } from "react-icons/md";
 
 const Navbar = () => {
   const { user, logOutUser, darkMode, setDarkMode } = useContext(AuthContext);
+  const [isHovering, setIsHovering] = useState(false);
 
   const links = (
     <div className="lg:flex gap-2 space-y-1 lg:space-y-0">
@@ -93,65 +94,67 @@ const Navbar = () => {
       </div>
       <div className="navbar-end">
         <div className="flex items-center gap-3">
-          <div className="hidden md:block">
-            {user && user.photoURL && (
+          {user && user.photoURL ? (
+            <div
+              className="relative"
+              onMouseEnter={() => setIsHovering(true)}
+              onMouseLeave={() => setIsHovering(false)}
+            >
               <img
                 referrerPolicy="no-referrer"
                 title={user.displayName}
                 src={user.photoURL}
                 alt={user.displayName}
-                className={`w-10 border-2 cursor-pointer rounded-full object-cover ${
+                className={`w-10 h-10 border-2 cursor-pointer rounded-full object-cover ${
                   darkMode ? "border-green-500" : "border-red-500"
                 }`}
               />
-            )}
-          </div>
-          <div>
-            {user && user.displayName ? (
-              <div className="flex items-center gap-3">
-                <h6
-                  className={`font-semibold hidden md:block ${
-                    darkMode ? "text-green-400" : "text-red-500"
+              {isHovering && (
+                <div
+                  className={`absolute right-0 w-48 bg-opacity-90 rounded-md shadow-lg z-50 p-4 ${
+                    darkMode ? "bg-black text-white" : "bg-white text-black"
                   }`}
                 >
-                  {user.displayName}
-                </h6>
-                <button
-                  onClick={logOutUser}
-                  className={`btn ${
-                    darkMode
-                      ? "bg-green-500 hover:bg-green-700 text-black"
-                      : "bg-red-500 hover:bg-orange-500 text-white"
-                  }`}
-                >
-                  Logout
-                </button>
-              </div>
-            ) : (
-              <div className="space-x-2">
-                <Link
-                  to={"/auth/login"}
-                  className={`btn ${
-                    darkMode
-                      ? "bg-green-500 text-black"
-                      : "bg-red-500 text-white hover:bg-green-500"
-                  }`}
-                >
-                  Login
-                </Link>
-                <Link
-                  to={"/auth/register"}
-                  className={`btn ${
-                    darkMode
-                      ? "bg-red-500 text-white hover:bg-green-500"
-                      : "bg-green-500 text-black"
-                  }`}
-                >
-                  Register
-                </Link>
-              </div>
-            )}
-          </div>
+                  <p className="font-semibold text-center mb-2">
+                    {user.displayName}
+                  </p>
+                  <button
+                    onClick={logOutUser}
+                    className={`btn w-full ${
+                      darkMode
+                        ? "bg-green-500 hover:bg-green-700 text-black"
+                        : "bg-red-500 hover:bg-orange-500 text-white"
+                    }`}
+                  >
+                    Logout
+                  </button>
+                </div>
+              )}
+            </div>
+          ) : (
+            <div className="space-x-2">
+              <Link
+                to={"/auth/login"}
+                className={`btn ${
+                  darkMode
+                    ? "bg-green-500 text-black"
+                    : "bg-red-500 text-white hover:bg-green-500"
+                }`}
+              >
+                Login
+              </Link>
+              <Link
+                to={"/auth/register"}
+                className={`btn ${
+                  darkMode
+                    ? "bg-red-500 text-white hover:bg-green-500"
+                    : "bg-green-500 text-black"
+                }`}
+              >
+                Register
+              </Link>
+            </div>
+          )}
 
           <button onClick={handleThemeToggle} className="btn">
             {darkMode ? <MdDarkMode /> : <MdLightMode />}

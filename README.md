@@ -85,3 +85,7 @@ Welcome to **Movie-Paradise**, your ultimate destination to explore and manage m
 - **MongoDB Atlas** for a seamless database solution.
 - **Firebase** for authentication and hosting.
 - **Recharts** for beautiful and interactive charts.
+
+---
+
+Server Side code: https://github.com/programming-hero-web-course2/b10-a10-server-side-ranak8811

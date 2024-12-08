@@ -1,13 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Banner from "../components/Banner";
 import { Link } from "react-router-dom";
 import MovieCard from "../components/movieCard";
 import Heading from "../components/Heading";
 import PopularMovieCard from "../components/PopularMovieCard";
+import { AuthContext } from "../providers/AuthProvider";
 
 const Home = () => {
+  const { darkMode } = useContext(AuthContext);
   const [featuredMovies, setFeaturedMovies] = useState([]);
-  const [darkMode, setDarkMode] = useState(true);
   const [genreMovies, setGenreMovies] = useState([]);
   const [selectedGenre, setSelectedGenre] = useState(null);
 
@@ -39,26 +40,12 @@ const Home = () => {
     "Horror",
   ];
 
-  const handleThemeToggle = () => {
-    setDarkMode(!darkMode);
-    document.documentElement.classList.toggle("dark", !darkMode);
-  };
-
   return (
     <div className={`${darkMode ? "dark" : ""}`}>
       <header>
         <Banner></Banner>
       </header>
       <section className="p-8 bg-gradient-to-r from-white via-gray-200 to-white dark:from-black dark:via-gray-900 dark:to-black text-black dark:text-white">
-        <div className="text-right">
-          <button
-            onClick={handleThemeToggle}
-            className="btn bg-gradient-to-r from-green-500 to-green-700 dark:from-red-600 dark:to-red-800 text-white font-bold px-4 py-2 rounded-md"
-          >
-            {darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
-          </button>
-        </div>
-
         <h2 className="text-3xl font-bold text-center mb-6 text-red-500 dark:text-green-500 border-b-2 border-red-600 dark:border-green-600 pb-2">
           Featured Movies
         </h2>

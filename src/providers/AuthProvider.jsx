@@ -17,6 +17,8 @@ export const AuthContext = createContext();
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [darkMode, setDarkMode] = useState(true);
+
   const googleProvider = new GoogleAuthProvider();
 
   const loginUsingGoogle = () => {
@@ -53,6 +55,8 @@ const AuthProvider = ({ children }) => {
     registerNewUser,
     updateUserProfile,
     loginRegisteredUser,
+    darkMode,
+    setDarkMode,
   };
 
   useEffect(() => {

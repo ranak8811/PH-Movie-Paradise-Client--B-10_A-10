@@ -88,4 +88,4 @@ Welcome to **Movie-Paradise**, your ultimate destination to explore and manage m
 
 ---
 
-Server Side code: https://github.com/programming-hero-web-course2/b10-a10-server-side-ranak8811
+Server Side code: https://github.com/ranak8811/PH-Movie-Paradise-Server--B-10_A-10

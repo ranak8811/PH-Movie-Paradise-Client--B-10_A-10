@@ -2,7 +2,7 @@ import "animate.css";
 
 const Banner = () => {
   return (
-    <div className="carousel w-full min-h-[calc(100vh-68px)]">
+    <div className="container mx-auto flex carousel w-full min-h-[calc(100vh-68px)] lg:min-h-[calc(100vh-268px)] dark:black">
       <div
         id="slide1"
         className="carousel-item relative w-full bg-cover bg-center"

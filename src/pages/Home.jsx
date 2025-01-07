@@ -41,7 +41,7 @@ const Home = () => {
   ];
 
   return (
-    <div className={`${darkMode ? "dark" : ""}`}>
+    <div className={`${darkMode ? "dark" : ""} container mx-auto`}>
       <header>
         <Banner></Banner>
       </header>
